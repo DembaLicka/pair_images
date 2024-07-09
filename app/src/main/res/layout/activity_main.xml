@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/leg2"/>
+
+
+    <RelativeLayout
+        android:id="@+id/avatar2"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/_55sdp"
+        android:layout_centerHorizontal="true">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignEnd="@id/ijk2"
+            android:background="@drawable/roundeddd"
+            android:alpha="0.5"/>
+
+
+        <ImageView
+            android:id="@+id/googl"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:src="@drawable/google"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_10sdp"/>
+
+
+        <TextView
+            android:id="@+id/ijk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/googl"
+            android:layout_centerVertical="true"
+            android:text="Continuer avec Google"
+            android:textSize="@dimen/_11ssp"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:textColor="#1D2029"/>
+        <TextView
+            android:id="@+id/ijk2"
+            android:layout_width="@dimen/_10sdp"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/ijk"
+
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/_11ssp"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:textColor="#1D2029"/>
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+</RelativeLayout>

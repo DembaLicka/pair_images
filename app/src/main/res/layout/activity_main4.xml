@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity4">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/ideojeu"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"/>
+
+
+    <ImageView
+        android:id="@+id/puzzle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_165sdp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_90sdp"
+        android:text="Jeu De Memoire"
+        android:src="@drawable/memoiiiire"
+        android:gravity="center"
+        android:textSize="@dimen/_60ssp"
+        android:textStyle="bold|italic"
+        android:fontFamily="@font/montroyal"
+        android:textColor="#600D33"/>
+
+    <RelativeLayout
+        android:id="@+id/jouer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/puzzle"
+        android:visibility="invisible"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_centerHorizontal="true">
+
+        <FrameLayout
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:background="@drawable/corner"
+            android:alpha="0.5"/>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/jouer2"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:layout_below="@id/jouer"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@drawable/drawable_with_stroke"
+        android:layout_centerHorizontal="true">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="@dimen/_75sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:src="@drawable/wood"
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/montroyal"
+            android:text="Jouer"
+            android:textColor="#FBFAFA"
+            android:textSize="@dimen/_18ssp"
+            android:textStyle="bold|italic" />
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/jouer3"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:layout_below="@id/jouer2"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@drawable/drawable_with_stroke"
+        android:layout_centerHorizontal="true">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="@dimen/_75sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:src="@drawable/wood"
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/montroyal"
+            android:text="Sortir"
+            android:textColor="#FBFAFA"
+            android:textSize="@dimen/_18ssp"
+            android:textStyle="bold|italic" />
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/bbb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/jouer"
+        android:layout_alignParentBottom="true">
+
+        <RelativeLayout
+            android:id="@+id/terminer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+
+            <TextView
+                android:id="@+id/partietermine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:fontFamily="@font/gamefontrebellion"
+                android:text="Partie terminée"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                android:visibility="invisible" />
+
+            <RelativeLayout
+                android:id="@+id/pa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/partietermine"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_10sdp">
+
+
+                <TextView
+                    android:id="@+id/nombredeminutesjoue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/tempstermine"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:layout_toEndOf="@id/tempstermine"
+                    android:fontFamily="@font/gamefontrebellion" />
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true">
+
+                </RelativeLayout>
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/profildujoueur"
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/_55sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:scaleType="centerCrop"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/couronne"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_alignBottom="@id/profildujoueur"
+                    android:layout_marginStart="-18dp"
+                    android:layout_toEndOf="@id/profildujoueur"
+                    android:background="@drawable/drawableblac"
+                    android:rotation="-20"
+                    android:src="@drawable/couronne"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
+
+                <RelativeLayout
+                    android:id="@+id/nameofplayer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_alignTop="@id/profildujoueur"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_toEndOf="@id/profildujoueur"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/sacorfainish"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_below="@id/nameofplayer"
+                    android:layout_alignStart="@id/nameofplayer"
+                    android:src="@drawable/sacor" />
+
+                <TextView
+                    android:id="@+id/bestPlayerScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/sacorfainish"
+                    android:layout_centerHorizontal="true"
+                    android:layout_toEndOf="@id/sacorfainish"
+                    android:fontFamily="@font/gamefontrebellion"
+                    android:textColor="@color/white" />
+
+
+                <ImageView
+                    android:id="@+id/ranking"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_alignTop="@id/sacorfainish"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/bestPlayerScore"
+                    android:src="@drawable/medal" />
+
+                <TextView
+                    android:id="@+id/rang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/sacorfainish"
+                    android:layout_toEndOf="@id/ranking"
+                    android:text="1"
+                    android:fontFamily="@font/gamefontrebellion"
+                    android:textColor="@color/white" />
+
+                <ImageView
+                    android:id="@+id/tempstermine"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_below="@id/sacorfainish"
+                    android:layout_alignStart="@id/sacorfainish"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:src="@drawable/timerr"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/duree"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/tempstermine"
+                    android:layout_toEndOf="@id/tempstermine"
+                    android:fontFamily="@font/gamefontrebellion"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rejouer22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pa"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_9sdp"
+                android:background="@drawable/rejouerdrawable">
+
+
+                <TextView
+                    android:id="@+id/bestplayername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    android:layout_marginBottom="@dimen/_4sdp"
+                    android:fontFamily="@font/gamefontrebellion"
+                    android:gravity="center"
+                    android:textColor="@color/white" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/sortir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pa"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_9sdp"
+                android:layout_toEndOf="@id/rejouer22"
+                android:background="@drawable/quiterdrawable">
+
+                <ImageView
+                    android:id="@+id/rejouer"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:src="@drawable/couronne" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/rejouer"
+                    android:layout_alignBottom="@id/rejouer"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_toEndOf="@id/rejouer"
+                    android:fontFamily="@font/gamefontrebellion"
+                    android:gravity="center"
+                    android:text="Best Player" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/bbb"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@id/bbb"
+        android:layout_alignBottom="@id/bbb">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/idprofil"
+            android:layout_width="@dimen/_45sdp"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/monprofilng"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/_5sdp"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"/>
+
+        <TextView
+            android:id="@+id/nomdujoueur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idprofil"
+            android:fontFamily="@font/gamefontrebellion"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_alignEnd="@id/idprofil"/>
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>

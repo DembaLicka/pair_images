@@ -1,0 +1,6 @@
+<!-- res/drawable/rounded_seekbar_thumb.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#FF0000" /> <!-- Couleur du pouce de la SeekBar -->
+    <corners android:radius="20dp" />
+    <size android:width="20dp" android:height="20dp" /> <!-- Ajustez la taille du pouce ici -->
+</shape>

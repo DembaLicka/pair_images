@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="textviewvalue">@dimen/_25sdp</dimen>
+    <dimen name="textvalu">@dimen/_25sdp</dimen>
+    <dimen name="rounded_corner_radius">@dimen/_5sdp</dimen>
+</resources>

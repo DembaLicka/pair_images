@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/_3sdp" /> <!-- Radius de 20dp -->
+            <solid android:color="#ECE7E7" />
+        </shape>
+    </item>
+
+    <!-- Couche 2 : Bleu avec coins arrondis et marges -->
+    <item
+
+        android:bottom="@dimen/_2sdp">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/_3sdp" /> <!-- Radius de 20dp -->
+            <solid android:color="#F3F4F4" />
+        </shape>
+    </item>
+</layer-list>

@@ -1,0 +1,17 @@
+<!-- res/drawable/rounded_seekbar_progress.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background">
+        <shape>
+            <solid android:color="#C0C0C0" />
+            <corners android:radius="20dp" /> <!-- Ajustez le rayon pour obtenir l'arrondi souhaité -->
+        </shape>
+    </item>
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape>
+                <solid android:color="#E84949" /> <!-- Couleur de la barre de progression -->
+                <corners android:radius="20dp" />
+            </shape>
+        </clip>
+    </item>
+</layer-list>
