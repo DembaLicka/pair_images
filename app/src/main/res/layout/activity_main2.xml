@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/legummes"/>
+        android:src="@drawable/juice" />
 
     <RelativeLayout
         android:id="@+id/pairtrouvelayout"
@@ -51,11 +51,20 @@
 
     </RelativeLayout>
 
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/consmere"
+        android:layout_alignBottom="@id/consmere"
+        android:layout_alignStart="@id/consmere"
+        android:layout_alignEnd="@id/consmere"
+        android:alpha="0.7"
+        android:background="@drawable/shapecorners"/>
+
     <RelativeLayout
         android:id="@+id/consmere"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/shapecorners"
         android:layout_centerInParent="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -66,6 +75,8 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_5sdp"
             android:layout_marginBottom="@dimen/_5sdp">
+
+
 
 
             <RelativeLayout
@@ -1909,7 +1920,6 @@
             android:layout_height="@dimen/_40sdp"
             android:layout_alignParentEnd="true"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
-            android:src="@drawable/chien"
             android:scaleType="centerCrop"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/_10sdp"/>
@@ -2178,18 +2188,16 @@
                     android:layout_width="@dimen/_120sdp"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/seticon"
-                    android:visibility="invisible">
+                    android:layout_toEndOf="@id/seticon">
 
                     <SeekBar
                         android:id="@+id/blurseekbar"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_25sdp"
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         android:layout_toStartOf="@id/feremre"
-                        android:progressDrawable="@drawable/seekbar_rounded"
-                        android:thumb="@drawable/custom_thumb2" />
+                        android:progressDrawable="@drawable/seekbar_rounded" />
 
                     <ImageView
                         android:id="@+id/feremre"

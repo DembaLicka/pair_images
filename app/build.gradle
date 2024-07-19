@@ -52,6 +52,8 @@ dependencies {
     implementation 'com.github.jgabrielfreitas:BlurImageView:1.0.1'
 
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+
 
 
     implementation platform('com.google.firebase:firebase-bom:31.5.0')

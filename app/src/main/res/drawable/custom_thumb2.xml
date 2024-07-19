@@ -6,9 +6,8 @@
         <shape android:shape="oval">
 
             <size
-                android:height="@dimen/_26sdp"
+                android:height="@dimen/_33sdp"
                 android:width="@dimen/_26sdp"/>
-            <solid android:color="@android:color/transparent" />
         </shape>
     </item>
 

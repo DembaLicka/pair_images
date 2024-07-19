@@ -24,12 +24,14 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
+import com.bumptech.glide.Glide
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.jgabrielfreitas.core.BlurImageView
 
@@ -48,6 +50,7 @@ class MainActivity2 : AppCompatActivity() {
     var scorer = 0
     lateinit var terminer : RelativeLayout
     lateinit var legumes : BlurImageView
+    lateinit var miaw : ImageView
 
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var mAuth: FirebaseAuth
@@ -121,7 +124,11 @@ class MainActivity2 : AppCompatActivity() {
         setContentView(R.layout.activity_main2)
 
         myId()
-
+        miaw = findViewById(R.id.miaw)
+        miaw.setOnClickListener {
+            val intent = Intent(this , MainActivity5::class.java)
+            startActivity(intent)
+        }
         mediaPlayer = MediaPlayer.create(this, R.raw.explainer)
         originalTextColor = textViewTimer.currentTextColor
         loadingImage.visibility = View.VISIBLE
@@ -154,16 +161,6 @@ class MainActivity2 : AppCompatActivity() {
 
         terminer.visibility = View.INVISIBLE
         miam.visibility = View.INVISIBLE
-        layoutseekbar.visibility = View.INVISIBLE
-        seticon.setOnClickListener {
-            if (layoutseekbar.isVisible){
-                layoutseekbar.visibility = View.INVISIBLE
-            }else{
-                layoutseekbar.visibility = View.VISIBLE
-            }
-
-
-        }
 
         flipInnimator = AnimatorInflater.loadAnimator(this ,R.anim.fip_in) as AnimatorSet
         flipOutnimator = AnimatorInflater.loadAnimator(this ,R.anim.fip_out) as AnimatorSet
@@ -186,6 +183,8 @@ class MainActivity2 : AppCompatActivity() {
         logicGame()
         onFinishGame()
         aimantUnscrenn()
+        displayProfileImage()
+        blurSeekbar.thumb = null
 
         blurSeekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
@@ -214,26 +213,30 @@ class MainActivity2 : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-    private fun flipLayout() {
-        val flipStart = AnimationUtils.loadAnimation(this, R.anim.fip_in)
-        val flipEnd = AnimationUtils.loadAnimation(this, R.anim.fip_out)
+    private fun displayProfileImage() {
+        val userId = mAuth.currentUser?.uid
+        userId?.let {
+            val database = Firebase.database
+            val usersRef = database.reference.child("users")
+            val currentUserRef = usersRef.child(userId)
 
-        flipStart.setAnimationListener(object : Animation.AnimationListener {
-            override fun onAnimationStart(animation: Animation) {
-                // Rien à faire ici
-            }
+            currentUserRef.child("imageUrl").addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val imageUrl = snapshot.getValue(String::class.java)
+                    if (!imageUrl.isNullOrEmpty()) {
+                        Glide.with(this@MainActivity2)
+                            .load(imageUrl)
+                            .into(miaw)
+                    }
+                }
 
-            override fun onAnimationEnd(animation: Animation) {
-                consmere.startAnimation(flipEnd)
-            }
-
-            override fun onAnimationRepeat(animation: Animation) {
-                // Rien à faire ici
-            }
-        })
-
-        consmere.startAnimation(flipStart)
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(this@MainActivity2, "Échec de la récupération de la photo de profil : ${error.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
     }
+
 
     private fun aimantUnscrenn() {
         val gifimage = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
@@ -594,9 +597,6 @@ class MainActivity2 : AppCompatActivity() {
             it.release()
         }
     }
-    private fun updateScoreInFirebase(newScore: Int) {
-        scoreReference.setValue(newScore)
-    }
 
     private fun myId(){
         textViewTimer = findViewById(R.id.chronometre)
@@ -761,6 +761,32 @@ class MainActivity2 : AppCompatActivity() {
             findViewById(R.id.textView10))
 
     }
+
+    private fun flipLayout() {
+        val flipStart = AnimationUtils.loadAnimation(this, R.anim.fip_in)
+        val flipEnd = AnimationUtils.loadAnimation(this, R.anim.fip_out)
+
+        flipStart.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationStart(animation: Animation) {
+                // Rien à faire ici
+            }
+
+            override fun onAnimationEnd(animation: Animation) {
+                consmere.startAnimation(flipEnd)
+            }
+
+            override fun onAnimationRepeat(animation: Animation) {
+                // Rien à faire ici
+            }
+        })
+
+        consmere.startAnimation(flipStart)
+    }
+    private fun updateScoreInFirebase(newScore: Int) {
+        scoreReference.setValue(newScore)
+    }
+
+
 
 }
 
