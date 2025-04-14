@@ -43,7 +43,6 @@ class DashedRingDrawable : Drawable() {
         return PixelFormat.OPAQUE
     }
 
-    // Ajuste la longueur du trait pour que nous terminions sur un espace et non au milieu d'un trait.
     private fun getNewDashLength(): Float {
         val circumference = Math.PI.toFloat() * mRingInnerRadius * 2
         val dashCount = (circumference / (DASH_LENGTH + GAP_LENGTH)).toInt()

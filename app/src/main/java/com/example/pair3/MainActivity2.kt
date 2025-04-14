@@ -2,25 +2,33 @@ package com.example.pair3
 
 import android.animation.Animator
 import android.animation.AnimatorInflater
+import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ArgbEvaluator
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
-import android.app.Activity
+import android.content.Context
 import android.content.Intent
-import android.graphics.*
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.graphics.drawable.AnimatedImageDrawable
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
 import android.media.MediaPlayer
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.*
 import android.util.Log
 import android.view.View
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.*
-import android.window.OnBackInvokedDispatcher
+import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
@@ -43,46 +51,51 @@ class MainActivity2 : AppCompatActivity() {
     private var selectedIndexes = mutableListOf<Int>()
     private var isFirstClick = true
     lateinit var totalPair : TextView
-    private lateinit var mediaPlayer: MediaPlayer
+    var mediaPlayer: MediaPlayer? = null
     lateinit var textViewTimer: TextView
     lateinit var countDownTimer: CountDownTimer
     var originalTextColor: Int = 0
     var scorer = 0
     lateinit var terminer : RelativeLayout
-    lateinit var legumes : BlurImageView
-    lateinit var miaw : ImageView
+    lateinit var fiinish : ImageView
+    private var isMuted = false
+
 
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var mAuth: FirebaseAuth
     lateinit var score : TextView
     private lateinit var scoreReference: DatabaseReference
     lateinit var relascore : RelativeLayout
-    lateinit var deplacer : RelativeLayout
+    lateinit var laychro : RelativeLayout
     lateinit var parentim1 : RelativeLayout
     lateinit var parentim2 : RelativeLayout
-    lateinit var nombredeminutesjoue : TextView
     lateinit var flipInnimator : AnimatorSet
     lateinit var flipOutnimator : AnimatorSet
     private lateinit var auth: FirebaseAuth
+    private val initialBackgrounds = mutableListOf<Int>() // Stockage des backgrounds initiaux
+    private val initialImagesBackup = mutableListOf<Int>() // Stocke les images initiales
+    private val initialLayoutsBackgrounds = mutableListOf<Int>()
+    val currentLayoutsBackgrounds = mutableListOf<Int>()
 
-
-    val imageIds = intArrayOf( R.drawable.m7, R.drawable.cerise2, R.drawable.m24
-        , R.drawable.m20, R.drawable.m6, R.drawable.m23, R.drawable.m8,
-        R.drawable.m17, R.drawable.m3 , R.drawable.m22 , R.drawable.m4 , R.drawable.m27,
-        R.drawable.m19 ,R.drawable.soup2, R.drawable.m15,R.drawable.bol, R.drawable.m12,R.drawable.m2
-        ,R.drawable.m26 ,R.drawable.m16,R.drawable.m29 ,R.drawable.panierr,R.drawable.m21,R.drawable.m9
-        ,R.drawable.m18,R.drawable.m5,R.drawable.m25,R.drawable.m14,R.drawable.mmmm,R.drawable.m13)
+    val imageIds = intArrayOf( R.drawable.l4, R.drawable.l51,R.drawable.l5
+        , R.drawable.l12, R.drawable.l57, R.drawable.l44, R.drawable.l50,
+        R.drawable.l38, R.drawable.l36 , R.drawable.m22 , R.drawable.l43 , R.drawable.l46,
+        R.drawable.m19 ,R.drawable.l49, R.drawable.l32,R.drawable.l8, R.drawable.l7,R.drawable.l47
+        ,R.drawable.l55 ,R.drawable.m16,R.drawable.l40 ,R.drawable.l1,R.drawable.l37,R.drawable.l39
+        ,R.drawable.m18,R.drawable.l35,R.drawable.l3,R.drawable.l34,R.drawable.l41,R.drawable.l48)
 
     lateinit var gifImage : ImageView
-    lateinit var seticon : ImageView
-    lateinit var imageanimer : ImageView
+    lateinit var gifImage2 : ImageView
     lateinit var gifJackpot : ImageView
+    lateinit var rescusite : RelativeLayout
+
+    private val normalDrawable: Drawable? by lazy { ContextCompat.getDrawable(this, R.drawable.two_layer_drawable8) }
+    private val strokeVertDrawable: Drawable? by lazy { ContextCompat.getDrawable(this, R.drawable.stroke) }
 
     lateinit var chrono: TextView
     private var isAnimationComplete = false
 
     private var initialImages: List<Int> = emptyList()
-    lateinit var textView : TextView
     private var pairsFound = 0
 
     private var firstIndex = -1
@@ -101,34 +114,41 @@ class MainActivity2 : AppCompatActivity() {
 
     lateinit var loadingImage: LottieAnimationView
     lateinit var eclair : RelativeLayout
-    lateinit var scortermine : TextView
-    lateinit var playerPositionTextView : TextView
+    lateinit var nombredetoile : TextView
     lateinit var selectedUserScoreTextView : TextView
     lateinit var selectedUserDurationTextView : TextView
     private var pairImageResourceId: Int = 0
     lateinit var resultImageView : ImageView
     lateinit var miam : ImageView
-    lateinit var tiret2 : ImageView
+
     lateinit var pluscind : TextView
     val totalTimeInMillis: Long = 3 * 60 * 1000 + 30 * 1000
     private var gameStartTimeMillis: Long = 0
     private var gameEndTimeMillis: Long = 0
-    lateinit var blurSeekbar : SeekBar
+
     lateinit var consmere : RelativeLayout
-    lateinit var layoutseekbar : RelativeLayout
+    lateinit var etoileLayout : RelativeLayout
+    lateinit var mute : RelativeLayout
+    lateinit var pasdeconnection : TextView
 
-
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("MissingInflatedId", "ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
 
         myId()
-        miaw = findViewById(R.id.miaw)
-        miaw.setOnClickListener {
-            val intent = Intent(this , MainActivity5::class.java)
-            startActivity(intent)
+        mute = findViewById(R.id.arretson)
+        mute.setOnClickListener {
+            toggleMute()
         }
+
+        pasdeconnection =  findViewById(R.id.pasdeconnection)
+
+
+       // etoileLayout.visibility = View.INVISIBLE
+
         mediaPlayer = MediaPlayer.create(this, R.raw.explainer)
         originalTextColor = textViewTimer.currentTextColor
         loadingImage.visibility = View.VISIBLE
@@ -147,7 +167,6 @@ class MainActivity2 : AppCompatActivity() {
             // Handle the case where the user is not signed in
         }
 
-
         rejouer.setOnClickListener {
             val intent = Intent(this , MainActivity4::class.java)
             startActivity(intent)
@@ -155,7 +174,6 @@ class MainActivity2 : AppCompatActivity() {
 
         }
 
-        myRecycler()
         retrievePlayersFromFirebase()
         google()
 
@@ -168,79 +186,65 @@ class MainActivity2 : AppCompatActivity() {
         flipOutnimator.setTarget(consmere)
         flipInnimator.setTarget(consmere)
 
-        tiret2.setOnClickListener {
-            if (consmere.rotationY==0f){
-                flipOutnimator.start()
-            }else{
-                flipInnimator.start()
-            }
-        }
-
-
-
         shuflleImage()
         timeToSeeImage()
         logicGame()
         onFinishGame()
         aimantUnscrenn()
-        displayProfileImage()
-        blurSeekbar.thumb = null
+        aimantUnscrenn2()
+        checkConnection()
 
-        blurSeekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                legumes.setBlur(progress) // Mettre à jour l'effet de floutage
-            }
+        val itemList = listOf(
+            ItemModel(R.drawable.derriere, "Licka"),
+            ItemModel(R.drawable.derrieree3, "Mara"),
+            ItemModel(R.drawable.ideojeu, "Cheikh"),
+            ItemModel(R.drawable.derriere2, "Amy"),
+            ItemModel(R.drawable.rounde_exepmle, "Ndio")
+        )
 
-            override fun onStartTrackingTouch(seekBar: SeekBar) {
-                // Rien à faire ici
-            }
+        // Configurer le RecyclerView en mode horizontal
+        userRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        userRecyclerView.adapter = ItemAdapter(itemList)
 
-            override fun onStopTrackingTouch(seekBar: SeekBar) {
-                // Rien à faire ici
-            }
-        })
+        rescusite.setOnClickListener {
+            showPairHint()
+        }
 
-        // Définir une valeur initiale pour le SeekBar
-        blurSeekbar.progress = 1 // Valeur initiale de floutage (ajustez selon vos besoins)
     }
 
-
-
-
+    fun isConnectedToInternet(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val network = connectivityManager.activeNetwork ?: return false
+            val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+            return when {
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                else -> false
+            }
+        } else {
+            val networkInfo = connectivityManager.activeNetworkInfo ?: return false
+            return networkInfo.isConnected
+        }
+    }
+    private fun checkConnection() {
+        if (isConnectedToInternet(this)) {
+           // textView.visibility = View.INVISIBLE
+        } else {
+            loadingImage.visibility = View.GONE
+            pasdeconnection.visibility = View.VISIBLE
+            pasdeconnection.text = "Vérifiez votre connexion ⚠"
+        }
+    }
     override fun onBackPressed() {
         super.onBackPressed()
         val intent = Intent(this , MainActivity4::class.java)
         startActivity(intent)
         finish()
     }
-    private fun displayProfileImage() {
-        val userId = mAuth.currentUser?.uid
-        userId?.let {
-            val database = Firebase.database
-            val usersRef = database.reference.child("users")
-            val currentUserRef = usersRef.child(userId)
-
-            currentUserRef.child("imageUrl").addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val imageUrl = snapshot.getValue(String::class.java)
-                    if (!imageUrl.isNullOrEmpty()) {
-                        Glide.with(this@MainActivity2)
-                            .load(imageUrl)
-                            .into(miaw)
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    Toast.makeText(this@MainActivity2, "Échec de la récupération de la photo de profil : ${error.message}", Toast.LENGTH_SHORT).show()
-                }
-            })
-        }
-    }
-
-
     private fun aimantUnscrenn() {
         val gifimage = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            ContextCompat.getDrawable(this, R.drawable.aimantunscreen) as? AnimatedImageDrawable
+            ContextCompat.getDrawable(this, R.drawable.box) as? AnimatedImageDrawable
         } else {
             TODO("VERSION.SDK_INT < P")
         }
@@ -248,49 +252,16 @@ class MainActivity2 : AppCompatActivity() {
         gifimage?.start()
 
     }
-    private fun shuflleImage() {
-        val imageIds = imageIds.toList().shuffled()
-        val selectedImages = imageIds.subList(0, 30)
-
-        val duplicatedImages = (selectedImages + selectedImages).toMutableList()
-        duplicatedImages.shuffle()
-
-        initialImages = duplicatedImages.toList() // Sauvegarde des images initiales
-
-        for (i in 0 until 60) {
-            val imageView = imageViews[i]
-            val relativeLayout = relativeLayouts[i]
-            imageView.setImageResource(duplicatedImages[i])
-            relativeLayout.isClickable = false // Désactiver les clics sur tous les RelativeLayouts initialement
+    private fun aimantUnscrenn2() {
+        val gifimage2 = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            ContextCompat.getDrawable(this, R.drawable.eclir) as? AnimatedImageDrawable
+        } else {
+            TODO("VERSION.SDK_INT < P")
         }
+        gifImage2.setImageDrawable(gifimage2)
+        gifimage2?.start()
     }
-    private fun timeToSeeImage() {
-        object : CountDownTimer(30000, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                val secondsLeft = millisUntilFinished / 1000
-                chrono.text = "$secondsLeft"
-            }
 
-            override fun onFinish() {
-                chrono.text = ""
-                //  legumes.visibility = View.VISIBLE
-                isAnimationComplete = true // Marquer l'animation comme complète
-                // Réactiver les clics sur toutes les images une fois l'animation terminée
-                for (imageView in imageViews) {
-                    imageView.isClickable = true
-
-                }
-                for (relativeLayout in relativeLayouts) {
-                    relativeLayout.isClickable = true
-                }
-                // Après le compte à rebours, retournez toutes les images vers l'image "jok"
-                for (imageView in imageViews) {
-                    imageView.setImageResource(R.drawable.heloping2)
-                }
-            }
-        }.start()
-
-    }
     private fun google() {
         var  textView = findViewById<TextView>(R.id.name)
 
@@ -354,6 +325,14 @@ class MainActivity2 : AppCompatActivity() {
 
         // Action à effectuer lorsque la minuterie est terminée ou toutes les paires sont trouvées
         terminer.visibility = View.VISIBLE
+      //  fiinish.visibility = View.VISIBLE
+      //  etoileLayout.visibility = View.VISIBLE
+
+        val slideDownAnimation = AnimationUtils.loadAnimation(this, R.anim.slide_down_2)
+        terminer.startAnimation(slideDownAnimation)
+       // fiinish.startAnimation(slideDownAnimation)
+       // etoileLayout.startAnimation(slideDownAnimation)
+
         textViewTimer.text = "00:00" // Afficher "00:00" lorsque la minuterie est terminée
 
         for (imageView in imageViews) {
@@ -365,7 +344,6 @@ class MainActivity2 : AppCompatActivity() {
 
         // Mettre à jour Firebase avec le score et le temps de jeu
         updateScoreAndTimeInFirebase(scorer, timePlayedText)
-        nombredeminutesjoue.text = timePlayedText
 
         if (isTimerFinished) {
         } else {
@@ -417,9 +395,7 @@ class MainActivity2 : AppCompatActivity() {
                     val currentUserIndex = userliste.indexOfFirst { it.userName == userId }
                     if (currentUserIndex != -1) {
                         val positionText = "${currentUserIndex + 1}"
-                        playerPositionTextView.text = positionText
                     } else {
-                        playerPositionTextView.text = "Joueur non trouvé"
                     }
                 }
 
@@ -444,26 +420,108 @@ class MainActivity2 : AppCompatActivity() {
             })
         }
     }
-    private fun myRecycler() {
-        userliste = ArrayList()
-        adapter = MyAdapter(userliste)
-        userRecyclerView.layoutManager = LinearLayoutManager(this ,LinearLayoutManager.HORIZONTAL,false)
-        userRecyclerView.adapter = adapter
+    private fun showPairHint() {
+        val hiddenPairs = mutableListOf<Pair<Int, Int>>()
+        val seenImages = mutableMapOf<Int, Int>()
 
+        for (i in initialImages.indices) {
+            if (selectedIndexes.contains(i)) continue // Ignorer les images déjà trouvées
+            val imageId = initialImages[i]
+            if (seenImages.containsKey(imageId)) {
+                val firstIndex = seenImages[imageId]!!
+                hiddenPairs.add(Pair(firstIndex, i))
+            } else {
+                seenImages[imageId] = i
+            }
+        }
+
+        if (hiddenPairs.isNotEmpty()) {
+            val (firstIndex, secondIndex) = hiddenPairs.random() // Prendre une paire au hasard
+            val firstRelativeLayout = relativeLayouts[firstIndex]
+            val secondRelativeLayout = relativeLayouts[secondIndex]
+            val firstImageView = imageViews[firstIndex]
+            val secondImageView = imageViews[secondIndex]
+
+            // Sauvegarder le fond original
+            val originalBg1 = firstRelativeLayout.background
+            val originalBg2 = secondRelativeLayout.background
+            val originalImage1 = firstImageView.drawable
+            val originalImage2 = secondImageView.drawable
+
+            // Changer le fond en arrondi et l'image en gris
+            firstRelativeLayout.setBackgroundResource(R.drawable.rounded_background)
+            secondRelativeLayout.setBackgroundResource(R.drawable.rounded_background)
+
+            // Rendre les images visibles temporairement
+            firstImageView.setImageResource(initialImages[firstIndex])
+            secondImageView.setImageResource(initialImages[secondIndex])
+
+            // Appliquer la couleur souhaitée sur l'image
+            firstImageView.setColorFilter(Color.parseColor("#000000"), PorterDuff.Mode.SRC_ATOP)
+            secondImageView.setColorFilter(Color.parseColor("#000000"), PorterDuff.Mode.SRC_ATOP)
+
+            // Ajouter un effet de clignotement
+            val blinkAnimation = AnimationUtils.loadAnimation(this, R.anim.blink)
+            firstRelativeLayout.startAnimation(blinkAnimation)
+            secondRelativeLayout.startAnimation(blinkAnimation)
+            firstImageView.startAnimation(blinkAnimation)
+            secondImageView.startAnimation(blinkAnimation)
+
+            // Restaurer le fond et l'image après 2 secondes
+            Handler(Looper.getMainLooper()).postDelayed({
+                firstRelativeLayout.clearAnimation()
+                secondRelativeLayout.clearAnimation()
+                firstImageView.clearAnimation()
+                secondImageView.clearAnimation()
+                firstRelativeLayout.background = originalBg1
+                secondRelativeLayout.background = originalBg2
+                firstImageView.setImageDrawable(originalImage1)
+                secondImageView.setImageDrawable(originalImage2)
+                firstImageView.clearColorFilter()
+                secondImageView.clearColorFilter()
+            }, 2000)
+        }
     }
 
+
     private fun logicGame() {
+        val strokeVertDrawable = ContextCompat.getDrawable(this, R.drawable.two_layer_drawable8)
+        val normalDrawable = ContextCompat.getDrawable(this, R.drawable.two_layer_drawable8)
+        val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+
+        var firstRelativeLayout: RelativeLayout? = null
+        var secondRelativeLayout: RelativeLayout? = null
+
         for (i in 0 until 60) {
             val imageView = imageViews[i]
             val relativeLayout = relativeLayouts[i]
+
             imageView.setOnClickListener {
                 if (isAnimationComplete && relativeLayout.isClickable && !selectedIndexes.contains(i)) {
+
+                    // Animation flip d'ouverture
+                    val rotateOut = ObjectAnimator.ofFloat(relativeLayout, "rotationY", 0f, 90f)
+                    val rotateIn = ObjectAnimator.ofFloat(relativeLayout, "rotationY", -90f, 0f)
+                    rotateOut.duration = 150
+                    rotateIn.duration = 150
+
+                    rotateOut.addListener(object : AnimatorListenerAdapter() {
+                        override fun onAnimationEnd(animation: Animator) {
+                            val initialImageId = initialImages[i]
+                            imageView.setImageResource(initialImageId)
+                            rotateIn.start()
+                        }
+                    })
+                    rotateOut.start()
+
                     if (firstIndex == -1) {
                         firstIndex = i
+                        firstRelativeLayout = relativeLayout
                         val drawable1 = ContextCompat.getDrawable(this, initialImages[firstIndex])
                         im1.setImageDrawable(drawable1)
                     } else if (secondIndex == -1) {
                         secondIndex = i
+                        secondRelativeLayout = relativeLayout
                         val drawable2 = ContextCompat.getDrawable(this, initialImages[secondIndex])
                         im2.setImageDrawable(drawable2)
 
@@ -476,101 +534,247 @@ class MainActivity2 : AppCompatActivity() {
                         }, 800)
                     }
 
-                    val initialImageId = initialImages[i]
-                    imageView.setImageResource(initialImageId)
                     selectedIndexes.add(i)
-                    playSound(R.raw.explainer) // Jouer un son au clic
+                    playSound(R.raw.explainer)
+
                     if (selectedIndexes.size == 2) {
                         val firstImageId = initialImages[selectedIndexes[0]]
                         val secondImageId = initialImages[selectedIndexes[1]]
+
                         if (firstImageId == secondImageId) {
-
                             playSound(R.raw.casino)
-
                             scorer += 5
                             score.text = scorer.toString()
-                            scortermine.text = scorer.toString()
 
-                            pairImageResourceId = initialImages[selectedIndexes[0]]
-
+                            pairImageResourceId = firstImageId
                             val resultDrawable = ContextCompat.getDrawable(this, pairImageResourceId)
                             resultImageView.setImageDrawable(resultDrawable)
 
-                            miam.visibility =  View.VISIBLE
-                            miam.setImageResource(R.drawable.yam)
+                            miam.visibility = View.VISIBLE
+                            miam.setImageResource(R.drawable.cinq)
                             layoutpluscinq.visibility = View.VISIBLE
-                            pluscind.text ="+5"
+                            pluscind.text = "+5"
 
-                            val zoomInAnimation = AnimationUtils.loadAnimation(this, R.anim.zoom_in)
+                            val zoomInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in)
                             resultImageView.startAnimation(zoomInAnimation)
                             animateImageView()
-                            miam.visibility =  View.INVISIBLE
+                            miam.visibility = View.INVISIBLE
 
-
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                vibrator.vibrate(VibrationEffect.createOneShot(100, 10))
+                            } else {
+                                @Suppress("DEPRECATION")
+                                vibrator.vibrate(100)
+                            }
 
                             for (imageView in imageViews) {
                                 imageView.isClickable = false
                             }
+
                             Handler(Looper.getMainLooper()).postDelayed({
                                 removePair()
                                 for (imageView in imageViews) {
                                     imageView.isClickable = true
                                 }
 
-                                pairsFound += 2 // Update pairs found count
+                                pairsFound += 2
                                 if (pairsFound == 120) {
                                     countDownTimer.cancel()
                                     endGame(false)
                                 }
                             }, 800)
                         } else {
-                            val shakeAnimation = AnimationUtils.loadAnimation(this, R.anim.shake)
-                            parentim1.startAnimation(shakeAnimation)
-                            parentim2.startAnimation(shakeAnimation)
+                            // Pas une paire → animation shake + flip retour
+                            val firstIndexLocal = selectedIndexes[0]
+                            val secondIndexLocal = selectedIndexes[1]
 
-                            for (imageView in imageViews) {
-                                imageView.isClickable = false
-                            }
+                            val firstLayout = relativeLayouts[firstIndexLocal]
+                            val secondLayout = relativeLayouts[secondIndexLocal]
+
+                            val firstImage = imageViews[firstIndexLocal]
+                            val secondImage = imageViews[secondIndexLocal]
+
+                            for (iv in imageViews) iv.isClickable = false
+
                             Handler(Looper.getMainLooper()).postDelayed({
-                                im1.setImageDrawable(null)
-                                im2.setImageDrawable(null)
-                                parentim1.clearAnimation()
-                                parentim2.clearAnimation()
-                                imageView.setImageResource(R.drawable.heloping2)
-                                val firstImageView = imageViews[selectedIndexes[0]]
-                                firstImageView.setImageResource(R.drawable.heloping2)
+                                val flipOut1 = ObjectAnimator.ofFloat(firstLayout, "rotationY", 0f, 90f)
+                                val flipIn1 = ObjectAnimator.ofFloat(firstLayout, "rotationY", -90f, 0f)
+                                flipOut1.duration = 150
+                                flipIn1.duration = 150
+
+                                flipOut1.addListener(object : AnimatorListenerAdapter() {
+                                    override fun onAnimationEnd(animation: Animator) {
+                                        firstLayout.setBackgroundResource(initialLayoutsBackgrounds[firstIndexLocal])
+                                        firstImage.setImageResource(initialImagesBackup[firstIndexLocal])
+                                        flipIn1.start()
+                                    }
+                                })
+
+                                // Flip retour deuxième layout
+                                val flipOut2 = ObjectAnimator.ofFloat(secondLayout, "rotationY", 0f, 90f)
+                                val flipIn2 = ObjectAnimator.ofFloat(secondLayout, "rotationY", -90f, 0f)
+                                flipOut2.duration = 150
+                                flipIn2.duration = 150
+
+                                flipOut2.addListener(object : AnimatorListenerAdapter() {
+                                    override fun onAnimationEnd(animation: Animator) {
+                                        secondLayout.setBackgroundResource(initialLayoutsBackgrounds[secondIndexLocal])
+                                        secondImage.setImageResource(initialImagesBackup[secondIndexLocal])
+                                        flipIn2.start()
+                                    }
+                                })
+
+                                flipOut1.start()
+                                flipOut2.start()
 
                                 selectedIndexes.clear()
-                                for (layout in relativeLayouts) {
-                                    layout.setBackgroundResource(R.drawable.two_layer_drawable)
+
+                               /* for (j in relativeLayouts.indices) {
+                                    relativeLayouts[j].setBackgroundResource(initialBackgrounds[j])
+
                                 }
-                                for (imageView in imageViews) {
-                                    imageView.isClickable = true
-                                }
+
+                                */
+
+
+
+                                for (iv in imageViews) iv.isClickable = true
+
                             }, 800)
                         }
                     }
-                    relativeLayout.setBackgroundResource(R.drawable.cornelay)
                 }
             }
         }
     }
-    private fun animateImageView() {
-        val moveUp = AnimationUtils.loadAnimation(this, R.anim.upanimation)
-        miam.startAnimation(moveUp)
+    private fun shuflleImage() {
+        val imageIds = imageIds.toList().shuffled()
+        val selectedImages = imageIds.subList(0, 30)
+
+        val duplicatedImages = (selectedImages + selectedImages).toMutableList()
+        duplicatedImages.shuffle()
+
+        initialImages = duplicatedImages.toList() // Sauvegarde des images initiales
+
+        for (i in 0 until 60) {
+            val imageView = imageViews[i]
+            val relativeLayout = relativeLayouts[i]
+
+            imageView.setImageResource(duplicatedImages[i])
+            relativeLayout.isClickable = false // Désactiver les clics sur tous les RelativeLayouts initialement
+
+            // Sauvegarder l'arrière-plan initial du RelativeLayout
+           // initialLayoutsBackgrounds.add((relativeLayout.background as? ColorDrawable)?.color ?: R.drawable.two_layer_drawable8)
+            initialLayoutsBackgrounds.add(R.drawable.two_layer_drawable8)
+
+        }
     }
-    override fun onDestroy() {
-        super.onDestroy()
-        countDownTimer.cancel()
+    private fun timeToSeeImage() {
+        object : CountDownTimer(30000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                val secondsLeft = millisUntilFinished / 1000
+                chrono.text = "$secondsLeft"
+            }
+
+            override fun onFinish() {
+                chrono.text = "00"
+                isAnimationComplete = true // L'animation d'affichage est terminée
+
+                // Réactiver les clics
+                for (imageView in imageViews) {
+                    imageView.isClickable = true
+                }
+                for (relativeLayout in relativeLayouts) {
+                    relativeLayout.isClickable = true
+                }
+
+                // Liste des backgrounds utilisés pour cacher les images
+                val backgrounds = listOf(
+                    R.drawable.two_layer_drawable9,
+                    R.drawable.two_layer_drawable11
+                )
+
+                // Nettoyer les anciennes sauvegardes
+                initialBackgrounds.clear()
+                initialImagesBackup.clear()
+                initialLayoutsBackgrounds.clear()
+                currentLayoutsBackgrounds.clear()
+
+                // Appliquer des backgrounds aléatoires pour cacher les images
+                for (i in imageViews.indices) {
+                    val parentLayout = imageViews[i].parent as? RelativeLayout
+                    val randomBg = backgrounds.random()
+
+                    parentLayout?.setBackgroundResource(randomBg)
+                    imageViews[i].setImageResource(randomBg)
+
+                    // Sauvegarder les backgrounds pour gestion future
+                    initialBackgrounds.add(randomBg)
+                    initialImagesBackup.add(randomBg)
+                    initialLayoutsBackgrounds.add(randomBg)
+                }
+            }
+        }.start()
     }
-    private fun animateGradient(textView: TextView) {
-        val animator = ObjectAnimator.ofInt(textView, "textColor", 0xff0000, 0xff0000)
-        animator.duration = 4000
-        animator.repeatCount = ObjectAnimator.INFINITE
-        animator.repeatMode = ObjectAnimator.REVERSE
-        animator.setEvaluator(ArgbEvaluator())
-        animator.start()
+
+    /* private fun timeToSeeImage() {
+        object : CountDownTimer(30000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                val secondsLeft = millisUntilFinished / 1000
+                chrono.text = "$secondsLeft"
+            }
+
+            override fun onFinish() {
+                chrono.text = "00"
+                isAnimationComplete = true // Marquer l'animation comme complète
+
+                // Réactiver les clics sur toutes les images une fois l'animation terminée
+                for (imageView in imageViews) {
+                    imageView.isClickable = true
+                }
+                for (relativeLayout in relativeLayouts) {
+                    relativeLayout.isClickable = true
+                }
+
+                // Liste des 9 backgrounds possibles
+                val backgrounds = listOf(
+                    R.drawable.two_layer_drawable9, R.drawable.two_layer_drawable11
+                )
+
+             //   initialBackgrounds.clear()
+               // initialImagesBackup.clear() // Réinitialiser la liste des images
+
+                currentLayoutsBackgrounds.clear()
+
+
+                for (i in imageViews.indices) {
+                    val parentLayout = imageViews[i].parent as? RelativeLayout
+                    val randomBg = backgrounds.random() // Choisir un background aléatoire
+
+                    // Sauvegarder le background initial du RelativeLayout
+
+                    parentLayout?.setBackgroundResource(randomBg)
+                    imageViews[i].setImageResource(randomBg)
+
+                    initialBackgrounds.add(randomBg)
+                    initialImagesBackup.add(randomBg)
+                    initialLayoutsBackgrounds.add(randomBg) //
+                   /*initialLayoutsBackgrounds.add(randomBg)
+
+                    parentLayout?.setBackgroundResource(randomBg) // Appliquer au RelativeLayout
+                    imageViews[i].setImageResource(randomBg) // Appliquer à l'ImageView aussi
+
+                    initialBackgrounds.add(randomBg) // Enregistrer le background initial
+                    initialImagesBackup.add(randomBg) // Enregistrer l'image initiale
+
+                    */
+                }
+            }
+        }.start()
     }
+
+    */
+    @SuppressLint("ResourceAsColor")
     private fun removePair() {
         for (index in selectedIndexes) {
             pairsFound++
@@ -578,62 +782,79 @@ class MainActivity2 : AppCompatActivity() {
             val imageView = imageViews[index]
             val relativeLayout = relativeLayouts[index]
             relativeLayout.isClickable = false
-            imageView.visibility = View.INVISIBLE
-            relativeLayout.setBackgroundResource(R.drawable.two_layer_drawable)
-            relativeLayout.alpha = 0.3f
+            imageView.setImageResource(R.drawable.vertpersonne)
+            relativeLayout.post {
+                relativeLayout.setBackgroundResource(R.drawable.forme10)
+            }
 
 
-
+            relativeLayout.alpha = 0.9f
         }
         selectedIndexes.clear()
         isFirstClick = true
 
 
     }
+    private fun animateImageView() {
+        val moveUp = AnimationUtils.loadAnimation(this, R.anim.upanimation)
+        miam.startAnimation(moveUp)
+    }
     private fun playSound(resourceId: Int) {
-        val mediaPlayer = MediaPlayer.create(this, resourceId)
-        mediaPlayer.start()
-        mediaPlayer.setOnCompletionListener {
+        // Vérifie si les sons sont activés avant de jouer le son
+        if (isMuted) return // Si le jeu est en mode muet, ne joue pas le son
+
+        mediaPlayer?.release() // Libère la ressource précédente si elle existe
+
+        mediaPlayer = MediaPlayer.create(this, resourceId)
+        mediaPlayer?.start()
+        mediaPlayer?.setOnCompletionListener {
             it.release()
+            mediaPlayer = null
         }
     }
-
+    fun toggleMute() {
+        isMuted = !isMuted // Bascule l'état du son
+        val message = if (isMuted) "Sons désactivés" else "Sons activés"
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        countDownTimer.cancel()
+        mediaPlayer?.release()
+        mediaPlayer = null
+    }
     private fun myId(){
         textViewTimer = findViewById(R.id.chronometre)
         gifImage = findViewById(R.id.gif)
+        gifImage2 = findViewById(R.id.eclir)
         gifJackpot = findViewById(R.id.jackpot)
         eclair = findViewById(R.id.eclair)
-        scortermine = findViewById(R.id.scortermine)
         im1 = findViewById(R.id.im1)
         im2 = findViewById(R.id.im2)
-        textView = findViewById(R.id.myTextView)
+      //  textView = findViewById(R.id.myTextView)
         totalPair = findViewById(R.id.totalpair)
         score = findViewById(R.id.scor)
-        animateGradient(textView)
-        tiret2 = findViewById(R.id.tiret2)
-        seticon = findViewById(R.id.seticon)
-        layoutseekbar = findViewById(R.id.layoutseekbar)
+        rescusite = findViewById(R.id.rescusite)
+       // animateGradient(textView)
+
         consmere = findViewById(R.id.consmere)
         miam = findViewById(R.id.miam)
-
-        blurSeekbar = findViewById(R.id.blurseekbar)
         parentim1 = findViewById(R.id.parentim1)
         resultImageView = findViewById(R.id.truee)
         parentim2 = findViewById(R.id.parentim2)
         rejouer = findViewById(R.id.rejouer5)
         pluscind = findViewById(R.id.plus5)
         layoutpluscinq = findViewById(R.id.layoutpluscinq)
-        legumes = findViewById(R.id.legumes)
         pairtrouvelayout = findViewById(R.id.pairtrouvelayout)
-        nombredeminutesjoue =  findViewById(R.id.nombredeminutesjoue)
         chrono = findViewById(R.id.chrono)
         terminer = findViewById(R.id.terminer)
         loadingImage = findViewById(R.id.lotti)
         userRecyclerView = findViewById(R.id.recycler)
-        playerPositionTextView = findViewById(R.id.rang)
         selectedUserScoreTextView = findViewById(R.id.mosecondscore)
         selectedUserDurationTextView = findViewById(R.id.duree2)
         relascore = findViewById(R.id.relascore2)
+        laychro = findViewById(R.id.laychro)
+        nombredetoile = findViewById(R.id.nombredetoile)
 
 
         imageViews = arrayOf(
@@ -761,32 +982,6 @@ class MainActivity2 : AppCompatActivity() {
             findViewById(R.id.textView10))
 
     }
-
-    private fun flipLayout() {
-        val flipStart = AnimationUtils.loadAnimation(this, R.anim.fip_in)
-        val flipEnd = AnimationUtils.loadAnimation(this, R.anim.fip_out)
-
-        flipStart.setAnimationListener(object : Animation.AnimationListener {
-            override fun onAnimationStart(animation: Animation) {
-                // Rien à faire ici
-            }
-
-            override fun onAnimationEnd(animation: Animation) {
-                consmere.startAnimation(flipEnd)
-            }
-
-            override fun onAnimationRepeat(animation: Animation) {
-                // Rien à faire ici
-            }
-        })
-
-        consmere.startAnimation(flipStart)
-    }
-    private fun updateScoreInFirebase(newScore: Int) {
-        scoreReference.setValue(newScore)
-    }
-
-
 
 }
 

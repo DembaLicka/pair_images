@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_120sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginStart="@dimen/_10sdp"
+    android:layout_marginEnd="@dimen/_10sdp"
+    android:layout_marginTop="@dimen/_7sdp"
+    android:background="@android:color/transparent">
+
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <RelativeLayout
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_55sdp"
+        android:layout_alignParentStart="true"
+        app:cardUseCompatPadding="true"
+        app:cardElevation="4dp"
+        android:rotation="20"
+        android:background="@drawable/formebizza"
+        android:layout_marginStart="-15dp"
+        android:layout_centerVertical="true">
+
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_55sdp"
+        android:layout_alignParentEnd="true"
+        app:cardUseCompatPadding="true"
+        app:cardElevation="4dp"
+        android:rotation="-20"
+        android:background="@drawable/formebizza2"
+        android:layout_marginEnd="-15dp"
+        android:layout_centerVertical="true">
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relaprent"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:background="@android:color/transparent">
+
+
+        <RelativeLayout
+            android:id="@+id/rec1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_15sdp">
+
+            <TextView
+                android:id="@+id/player"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/bienalbold"
+                android:text="Player"
+                android:textColor="#989898"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/nomjoueur"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/player"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/bienalbold"
+                android:text=""
+                android:textColor="#EFEEEE"
+                android:textStyle="bold" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/phot"
+                android:layout_width="@dimen/_65sdp"
+                android:layout_height="@dimen/_65sdp"
+                android:layout_below="@id/nomjoueur"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/forme5"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rec2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_25sdp">
+
+            <TextView
+                android:id="@+id/player"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/bienalbold"
+                android:text="Player"
+                android:textColor="#989898"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/nomjoueur2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/player"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/bienalbold"
+                android:text="opponent"
+                android:textColor="#EFEEEE"
+                android:textStyle="bold" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="@dimen/_65sdp"
+                android:layout_height="@dimen/_65sdp"
+                android:layout_below="@id/nomjoueur2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/inetr"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toStartOf="@id/rec2"
+            android:layout_toEndOf="@id/rec1">
+
+
+            <RelativeLayout
+                android:id="@+id/salon"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_17sdp"
+                android:layout_centerHorizontal="true">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_20sdp"
+                    android:alpha="0.5"
+                    android:background="@drawable/recta" />
+
+
+                <TextView
+                    android:id="@+id/textViewRoomName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="#FBFBFB"
+                    android:textSize="@dimen/_8ssp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/deuxjoueurs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textViewRoomName"
+                    android:layout_alignStart="@id/textViewRoomName"
+                    android:textColor="#CDCACA"
+                    android:textSize="@dimen/_9ssp"
+                    android:textStyle="bold"
+                    android:visibility="invisible" />
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/unsurdeux"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/salon"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/raleway"
+                android:text="(1/2)"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/myTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="-10dp"
+                android:fontFamily="@font/script"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4"
+                android:text="V"
+                android:textColor="#C8AF0D"
+                android:textSize="34sp" />
+
+            <TextView
+                android:id="@+id/myTextView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/myTextView"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="-12dp"
+                android:layout_marginTop="-22dp"
+                android:layout_toEndOf="@id/myTextView"
+                android:fontFamily="@font/script"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4"
+                android:text="S"
+                android:textColor="#DD38B4"
+                android:textSize="34sp" />
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

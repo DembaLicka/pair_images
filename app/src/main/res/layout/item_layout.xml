@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_3sdp"
+    android:layout_marginEnd="@dimen/_2sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <RelativeLayout
+        android:id="@+id/ol"
+        android:layout_width="@dimen/_42sdp"
+        android:layout_height="@dimen/_42sdp"
+        android:background="@drawable/violet">
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/proffil"
+            android:layout_width="@dimen/_38sdp"
+            android:layout_height="@dimen/_38sdp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/_3sdp"
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+            android:src="@drawable/derrieree3"/>
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/naame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Licka"
+        android:layout_below="@id/ol"
+        android:textSize="@dimen/_8ssp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"/>
+
+
+</RelativeLayout>

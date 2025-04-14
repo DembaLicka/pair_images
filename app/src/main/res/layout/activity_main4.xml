@@ -3,14 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#FFFFFF"
     android:layout_height="match_parent"
     tools:context=".MainActivity4">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/ideojeu"
-        android:scaleType="centerCrop"/>
 
     <TextView
         android:id="@+id/name"
@@ -18,337 +13,610 @@
         android:layout_height="wrap_content"
         android:visibility="invisible"/>
 
-
-    <ImageView
-        android:id="@+id/puzzle"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_165sdp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_90sdp"
-        android:text="Jeu De Memoire"
-        android:src="@drawable/memoiiiire"
-        android:gravity="center"
-        android:textSize="@dimen/_60ssp"
-        android:textStyle="bold|italic"
-        android:fontFamily="@font/montroyal"
-        android:textColor="#600D33"/>
-
-    <RelativeLayout
-        android:id="@+id/jouer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/puzzle"
-        android:visibility="invisible"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:layout_centerHorizontal="true">
-
-        <FrameLayout
-            android:layout_width="@dimen/_90sdp"
-            android:layout_height="@dimen/_90sdp"
-            android:background="@drawable/corner"
-            android:alpha="0.5"/>
-
-
-    </RelativeLayout>
-
-
-    <RelativeLayout
-        android:id="@+id/jouer2"
-        android:layout_width="@dimen/_80sdp"
-        android:layout_height="@dimen/_25sdp"
-        android:layout_below="@id/jouer"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:background="@drawable/drawable_with_stroke"
-        android:layout_centerHorizontal="true">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:layout_width="@dimen/_75sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:src="@drawable/wood"
-            android:scaleType="centerCrop"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"/>
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:fontFamily="@font/montroyal"
-            android:text="Jouer"
-            android:textColor="#FBFAFA"
-            android:textSize="@dimen/_18ssp"
-            android:textStyle="bold|italic" />
-
-
-    </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/jouer3"
-        android:layout_width="@dimen/_80sdp"
-        android:layout_height="@dimen/_25sdp"
-        android:layout_below="@id/jouer2"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:background="@drawable/drawable_with_stroke"
-        android:layout_centerHorizontal="true">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:layout_width="@dimen/_75sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:src="@drawable/wood"
-            android:scaleType="centerCrop"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"/>
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:fontFamily="@font/montroyal"
-            android:text="Sortir"
-            android:textColor="#FBFAFA"
-            android:textSize="@dimen/_18ssp"
-            android:textStyle="bold|italic" />
-
-
-    </RelativeLayout>
     <RelativeLayout
         android:id="@+id/bbb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/jouer"
-        android:layout_alignParentBottom="true">
+        android:layout_marginTop="@dimen/_20sdp"
+        >
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <RelativeLayout
-            android:id="@+id/terminer"
+            android:id="@+id/pho"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true">
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_below="@id/adView2">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/idprofil"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_centerVertical="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/monprofilng"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
 
 
             <TextView
-                android:id="@+id/partietermine"
+                android:id="@+id/vous"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:fontFamily="@font/gamefontrebellion"
-                android:text="Partie terminée"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_12ssp"
-                android:visibility="invisible" />
+                android:layout_toEndOf="@id/idprofil"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:text="Vous"
+                android:textColor="#E1DFDF"
+                android:textStyle="bold"/>
 
             <RelativeLayout
-                android:id="@+id/pa"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/partietermine"
-                android:layout_centerHorizontal="true"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:layout_marginEnd="@dimen/_10sdp">
+                android:layout_width="@dimen/_55sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_below="@id/vous"
+                android:layout_alignBottom="@id/idprofil"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_toEndOf="@id/idprofil">
 
-
-                <TextView
-                    android:id="@+id/nombredeminutesjoue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/tempstermine"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginStart="@dimen/_2sdp"
-                    android:layout_toEndOf="@id/tempstermine"
-                    android:fontFamily="@font/gamefontrebellion" />
-
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true">
-
-                </RelativeLayout>
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/profildujoueur"
-                    android:layout_width="@dimen/_55sdp"
-                    android:layout_height="@dimen/_55sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:scaleType="centerCrop"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/couronne"
-                    android:layout_width="@dimen/_15sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:layout_alignBottom="@id/profildujoueur"
-                    android:layout_marginStart="-18dp"
-                    android:layout_toEndOf="@id/profildujoueur"
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:background="@drawable/drawableblac"
-                    android:rotation="-20"
-                    android:src="@drawable/couronne"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
-
-                <RelativeLayout
-                    android:id="@+id/nameofplayer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:layout_alignTop="@id/profildujoueur"
-                    android:layout_marginStart="@dimen/_3sdp"
-                    android:layout_toEndOf="@id/profildujoueur"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/sacorfainish"
-                    android:layout_width="@dimen/_15sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:layout_below="@id/nameofplayer"
-                    android:layout_alignStart="@id/nameofplayer"
-                    android:src="@drawable/sacor" />
-
-                <TextView
-                    android:id="@+id/bestPlayerScore"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/sacorfainish"
-                    android:layout_centerHorizontal="true"
-                    android:layout_toEndOf="@id/sacorfainish"
-                    android:fontFamily="@font/gamefontrebellion"
-                    android:textColor="@color/white" />
+                    android:alpha="0.5"/>
 
 
                 <ImageView
-                    android:id="@+id/ranking"
-                    android:layout_width="@dimen/_15sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:layout_alignTop="@id/sacorfainish"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_toEndOf="@id/bestPlayerScore"
-                    android:src="@drawable/medal" />
-
-                <TextView
-                    android:id="@+id/rang"
+                    android:id="@+id/medail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/sacorfainish"
-                    android:layout_toEndOf="@id/ranking"
-                    android:text="1"
-                    android:fontFamily="@font/gamefontrebellion"
-                    android:textColor="@color/white" />
-
-                <ImageView
-                    android:id="@+id/tempstermine"
-                    android:layout_width="@dimen/_15sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:layout_below="@id/sacorfainish"
-                    android:layout_alignStart="@id/sacorfainish"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:src="@drawable/timerr"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:id="@+id/duree"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/tempstermine"
-                    android:layout_toEndOf="@id/tempstermine"
-                    android:fontFamily="@font/gamefontrebellion"
-                    android:textColor="@color/white"
-                    android:textStyle="bold" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rejouer22"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/pa"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:layout_marginBottom="@dimen/_9sdp"
-                android:background="@drawable/rejouerdrawable">
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:src="@drawable/medal"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginBottom="@dimen/_2sdp"/>
 
 
                 <TextView
-                    android:id="@+id/bestplayername"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/medail"
+                    android:layout_centerVertical="true"
+                    android:text="26"
+                    android:textColor="#FAF9F9"
                     android:layout_marginStart="@dimen/_4sdp"
-                    android:layout_marginTop="@dimen/_4sdp"
-                    android:layout_marginEnd="@dimen/_4sdp"
-                    android:layout_marginBottom="@dimen/_4sdp"
-                    android:fontFamily="@font/gamefontrebellion"
-                    android:gravity="center"
-                    android:textColor="@color/white" />
-
+                    android:textStyle="bold"/>
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/sortir"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/pa"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:layout_marginBottom="@dimen/_9sdp"
-                android:layout_toEndOf="@id/rejouer22"
-                android:background="@drawable/quiterdrawable">
-
-                <ImageView
-                    android:id="@+id/rejouer"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:src="@drawable/couronne" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/rejouer"
-                    android:layout_alignBottom="@id/rejouer"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:layout_toEndOf="@id/rejouer"
-                    android:fontFamily="@font/gamefontrebellion"
-                    android:gravity="center"
-                    android:text="Best Player" />
-
-            </RelativeLayout>
 
         </RelativeLayout>
-
-
-
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/bbb"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@id/bbb"
-        android:layout_alignBottom="@id/bbb">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/idprofil"
-            android:layout_width="@dimen/_45sdp"
-            android:layout_height="@dimen/_45sdp"
-            android:layout_centerVertical="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/monprofilng"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/_5sdp"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"/>
 
         <TextView
             android:id="@+id/nomdujoueur"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/idprofil"
-            android:fontFamily="@font/gamefontrebellion"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:layout_alignEnd="@id/idprofil"/>
+            android:layout_below="@id/pho"
+            android:layout_alignStart="@id/pho"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:textSize="@dimen/_11ssp"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_below="@id/bbb">
 
 
+
+
+        <RelativeLayout
+            android:id="@+id/blurView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="19dp">
+
+
+            <RelativeLayout
+                android:id="@+id/textView20"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_130sdp"
+                android:text="TextView"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    app:shapeAppearanceOverlay="@style/rectan2"
+                    android:src="@drawable/moulu2"/>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha="0.8"
+                    android:background="@drawable/whith_with_stroke2" />
+
+                <TextView
+                    android:id="@+id/solo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Solo"
+                    android:textSize="@dimen/_18ssp"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="@dimen/_25sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/elite"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="wrap_content"
+                    android:text="Devenez l'elite en mode solo "
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="#B1AFAF"
+                    android:layout_below="@id/solo"
+                    android:layout_marginStart="@dimen/_25sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textStyle="bold"/>
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/elite"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentTop="true"
+                    android:src="@drawable/removepizza"
+                    android:scaleType="centerCrop"/>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/elite"
+                    android:layout_alignParentBottom="true">
+
+                    <RelativeLayout
+                        android:layout_width="@dimen/_90sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_25sdp">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/forme_bizzare"
+                            android:alpha="0.6"/>
+
+
+                        <TextView
+                            android:id="@+id/commencer2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_8sdp"
+                            android:text="Commencer"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/textView21"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_130sdp"
+                android:text="TextView"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_below="@id/textView20"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    app:shapeAppearanceOverlay="@style/rectan2"
+                    android:backgroundTint="@android:color/transparent"
+                    android:src="@drawable/moulu"/>
+
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha="0.0"
+                    android:background="@drawable/whith_with_stroke" />
+
+
+                <TextView
+                    android:id="@+id/multijoueur"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Multijoueur "
+                    android:textSize="@dimen/_18ssp"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="@dimen/_25sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/affrontez"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="wrap_content"
+                    android:text="Affrontez les joueurs du monde "
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="#B1AFAF"
+                    android:layout_below="@id/multijoueur"
+                    android:layout_marginStart="@dimen/_25sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textStyle="bold"/>
+
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/affrontez"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentTop="true">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:src="@drawable/pan2"
+                        android:scaleType="centerCrop"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/floati6"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_above="@id/bbb"
+                    android:layout_marginBottom="-12dp"
+                    android:layout_marginEnd="@dimen/_15sdp">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:alpha="0.3"
+                        android:background="@drawable/rounded_blanch"/>
+
+
+                    <TextView
+                        android:id="@+id/nmbreroom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:textSize="@dimen/_13ssp"
+                        android:hint="0"
+                        android:textColorHint="@color/white"
+                        android:fontFamily="@font/raleway"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        android:src="@drawable/remo"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/bbb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/affrontez"
+                    android:layout_alignParentBottom="true">
+
+                    <RelativeLayout
+                        android:id="@+id/joinrom"
+                        android:layout_width="@dimen/_90sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_25sdp">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/forme_bizzare"
+                            android:alpha="0.3"/>
+
+
+                        <TextView
+                            android:id="@+id/commencer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_8sdp"
+                            android:text="Rejoindre"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/floati"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/_15sdp">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:alpha="0.3"
+                            android:background="@drawable/rounded_blanch"/>
+
+
+                        <ImageView
+                            android:id="@+id/creer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:src="@drawable/remo"
+                            android:layout_marginBottom="@dimen/_8sdp"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/myrom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/blurView"
+            android:layout_alignStart="@id/blurView"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Votre Salle"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/myrom"
+            android:layout_alignParentBottom="true">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:background="@drawable/forme5"
+                android:layout_margin="@dimen/_12sdp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="@dimen/_200sdp"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:layout_alignParentEnd="true"
+                    app:shapeAppearanceOverlay="@style/rectan2"
+                    android:src="@drawable/poi"/>
+
+
+                <TextView
+                    android:id="@+id/ceciest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:text="Ceci est votre salon"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/bienalbold"
+                    android:textSize="@dimen/_16ssp"/>
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="@dimen/_120sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@id/ceciest"
+                    android:layout_below="@id/ceciest"
+                    android:textColor="#BDBDBD"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_10ssp"
+                    android:text="le salon que vous creerez apparaitra ici."/>
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/description"
+                    android:layout_alignStart="@id/ceciest"
+                    android:layout_above="@id/jouerr">
+
+                    <ImageView
+                        android:id="@+id/iconn"
+                        android:layout_width="@dimen/_12sdp"
+                        android:layout_height="@dimen/_12sdp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/remo"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/iconn"
+                        android:layout_centerVertical="true"
+                        android:layout_alignTop="@id/iconn"
+                        android:layout_alignBottom="@id/iconn"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:text="En attente"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/bienalbold"
+                        android:textColor="#A8A8A8"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/jouerr"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:layout_alignStart="@id/ceciest"
+                    android:background="@drawable/formrbizzare_rouge">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        android:text="Jouer"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/bienalbold"
+                        android:textSize="@dimen/_11ssp"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/delete"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:layout_toEndOf="@id/jouerr"
+                    android:layout_marginStart="@dimen/_15sdp">
+
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:alpha="0.5"
+                        android:background="@drawable/forme_bizzare"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        android:text="Supprimer"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/bienalbold"
+                        android:textSize="@dimen/_11ssp"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="@dimen/_20sdp"
+        android:layout_alignParentBottom="true">
+
+        <FrameLayout
+            android:id="@+id/floating"
+            android:layout_width="match_parent"
+            android:background="@drawable/rounded_blanch"
+            android:alpha="0.4"
+            android:layout_height="match_parent"/>
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginEnd="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:src="@drawable/remo" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layoutcretaeroom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/_95sdp">
+
+
+        <RelativeLayout
+            android:id="@+id/relaedit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/editdrawabletext">
+
+            <EditText
+                android:id="@+id/editTextRoomCode"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:hint="create room"
+                android:background="@android:color/transparent"
+                android:textColorHint="#CCCBCB"
+                android:textStyle="bold"/>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/createroom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/cornerlayout"
+            android:layout_toEndOf="@id/relaedit">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_5sdp"
+                android:text="create"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Dégradé de fond -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#FDA5D1"
+                android:endColor="#E4BC55"
+                android:angle="0"
+                android:type="linear"/>
+
+            <corners android:radius="@dimen/_100sdp"/>
+        </shape>
+    </item>
+    <!-- Contour animé -->
+    <item>
+        <shape android:shape="rectangle">
+
+        </shape>
+    </item>
+</layer-list>

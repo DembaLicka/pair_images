@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <RelativeLayout
+            android:id="@+id/jkjgh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true">
@@ -17,15 +19,24 @@
                     android:layout_centerHorizontal="true"
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"/>
 
+                <FrameLayout
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_toEndOf="@id/profil"
+                    android:layout_alignBottom="@id/profil"
+                    android:layout_marginStart="-18dp"
+                    android:rotation="-20"
+                    android:background="@drawable/drawableblac"
+                        android:alpha="0.5"/>
+
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/couronne"
                     android:layout_width="@dimen/_15sdp"
                     android:layout_height="@dimen/_15sdp"
-                    android:background="@drawable/drawableblac"
                     android:layout_centerHorizontal="true"
                     android:layout_toEndOf="@id/profil"
                     android:rotation="-20"
-
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                     android:layout_alignBottom="@id/profil"
                     android:layout_marginStart="-18dp" />
@@ -44,6 +55,8 @@
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:gravity="center"
+                    android:fontFamily="@font/bienal"
+                    android:layout_marginTop="@dimen/_1sdp"
                     android:layout_below="@id/profil"
                     android:layout_centerHorizontal="true"
                     android:textStyle="bold"
@@ -51,9 +64,6 @@
                     android:textSize="@dimen/_7ssp"/>
 
         </RelativeLayout>
-
-
-
 
 
 

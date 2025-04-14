@@ -42,11 +42,9 @@ class MyAdapter(private val userList: ArrayList<User>) : RecyclerView.Adapter<My
             if (user.PhotoUrl.isNotEmpty()) {
                 Picasso.get().load(user.PhotoUrl).into(profil)
             } else {
-                // Affiche une photo par défaut si aucune photo n'est disponible
-                profil.setImageResource(R.drawable.chien)
+                profil.setImageResource(R.drawable.game3)
             }
 
-            // Affiche la couronne en fonction du classement
             when (adapterPosition) {
                 0 -> couronne.setImageResource(R.drawable.couronne)
                 1 -> couronne.setImageResource(R.drawable.couronne2)
